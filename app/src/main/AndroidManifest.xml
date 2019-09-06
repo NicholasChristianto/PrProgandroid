@@ -14,10 +14,6 @@
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".home"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
