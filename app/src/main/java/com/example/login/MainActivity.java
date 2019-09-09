@@ -12,13 +12,13 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    private Button btn;
+ //   private Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login();
-        prepareFragmment();
+//        prepareFragmment();
 //        move();
     }
 
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
-    private void prepareFragmment(){
-        this.getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, new fragment_message()).commit();
-    }
+//    private void prepareFragmment(){
+//        this.getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, new fragment_message()).commit();
+//    }
 //    protected void move() {
 //        btn = findViewById(R.id.fragment_move);
 //        btn.setOnClickListener(new View.OnClickListener() {

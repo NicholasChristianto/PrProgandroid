@@ -21,6 +21,7 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         keAbout();
         logOut();
+        prepareFragmment();
     }
 
     protected void keAbout() {
@@ -43,5 +44,8 @@ public class homePage extends AppCompatActivity {
                 startActivity(main);
             }
         });
+    }
+    private void prepareFragmment(){
+        this.getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, new fragment_message()).commit();
     }
 }
