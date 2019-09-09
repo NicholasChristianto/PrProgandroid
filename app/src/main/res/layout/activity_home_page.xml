@@ -49,4 +49,5 @@
         android:text="Log Out"
         android:id="@+id/logout"
         />
+
 </RelativeLayout>
