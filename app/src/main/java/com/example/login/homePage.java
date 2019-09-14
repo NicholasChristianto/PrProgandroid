@@ -5,9 +5,11 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 import android.widget.Button;
@@ -19,22 +21,26 @@ public class homePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        keAbout();
-        logOut();
-        prepareFragmment();
+        ViewPager vp = findViewById(R.id.view_pager);
+        vp.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),2));
+        TabLayout tl = findViewById(R.id.tab_layout);
+        tl.setupWithViewPager(vp);
+//        keAbout();
+//        logOut();
+        //prepareFragmment();
     }
 
-    protected void keAbout() {
-        button = findViewById(R.id.about);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent about = new Intent(homePage.this, About.class);
-                startActivity(about);
-            }
-
-        });
-    }
+//    protected void keAbout() {
+//        button = findViewById(R.id.about);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent about = new Intent(homePage.this, About.class);
+//                startActivity(about);
+//            }
+//
+//        });
+//    }
     protected void logOut(){
         button = findViewById(R.id.logout);
         button.setOnClickListener(new View.OnClickListener(){
@@ -45,7 +51,8 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-    private void prepareFragmment(){
-        this.getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, new fragment_message()).commit();
-    }
+//    private void prepareFragmment(){
+//        this.getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, new fragment_message()).commit();
+//    }
+
 }

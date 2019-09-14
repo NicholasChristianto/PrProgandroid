@@ -1,60 +1,48 @@
 <RelativeLayout android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-
-    >
-    <TextView
-        android:id="@+id/nama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama:"
-        android:textSize="30dp"
-        />
-
-    <EditText
-        android:id="@+id/isinama"
+    android:background="@android:color/black">
+    <Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/nama"
-        android:text="nama saya"
-        />
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email:"
-        android:textSize="30dp"
-        android:layout_below="@+id/nama"
-        />
-    <EditText
-        android:layout_toRightOf="@+id/email"
-        android:layout_below="@+id/isinama"
+        android:title="Welcome"
+        android:id="@+id/toolbar"
+        android:titleTextColor="@android:color/white"
+
+        ></Toolbar>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="saya@gmail.com"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About"
-        android:layout_below="@+id/email"
-        android:id="@+id/about"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/about"
-        android:layout_below="@+id/email"
-        android:text="Log Out"
-        android:id="@+id/logout"
-        />
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_placeholder"
-        android:layout_below="@id/logout"
+        android:background="@android:color/black"
         >
 
-    </FrameLayout>
+    <androidx.viewpager.widget.ViewPager
+    android:id="@+id/view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="@android:color/white"
+        />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout"
+            android:text="Log Out"
+            android:layout_toRightOf="@+id/tab_layout"
+            />
+
+    </androidx.viewpager.widget.ViewPager>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+
 </RelativeLayout>

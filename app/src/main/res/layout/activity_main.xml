@@ -3,15 +3,9 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:backgroundTint="@color/colorPrimary"
-    >
-    <!--<FrameLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/fragment_placeholder"-->
-        <!--&gt;-->
 
-    <!--</FrameLayout>-->
+    >
+
     <EditText
         android:id="@+id/txtEmailAddress"
         android:layout_width="match_parent"
