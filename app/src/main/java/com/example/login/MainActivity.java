@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+
+
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private EditText uname;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (cek(String.valueOf(uname.getText()), String.valueOf(pw.getText()))) {
                     Intent home = new Intent(MainActivity.this, homePage.class);
+                    Bundle b = new Bundle();
+                    b.putString("Email: ", uname.getText().toString());
+                    home.putExtras(b);
                     finish();
                     startActivity(home);
                 }
