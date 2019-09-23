@@ -1,32 +1,46 @@
 package com.example.login;
 
 import android.app.NotificationManager;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class homePage extends AppCompatActivity {
     Boolean boolReceiver=false;
     Boolean isReceiverRegistered=false;
     Boolean wifiConnected = false;
+    private static final String TAG = "HomePage";
+    public static final long INTERVAL=3000;//variable to execute services every 10 second
+    private Handler mHandler=new Handler(); // run on another Thread to avoid crash
+    private Timer mTimer=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +95,48 @@ public class homePage extends AppCompatActivity {
         }
         System.out.println("Wifi Status: "+wifiConnected);
     }
+    public void scheduleJob(View v){
+        ComponentName cn = new ComponentName(this, ExampleJobService.class);
+        JobInfo info = new JobInfo.Builder(123, cn)
+                .setPersisted(true)
+                .setPeriodic(15*60*1000)
+                .build();
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if(resultCode == JobScheduler.RESULT_SUCCESS){
+            Log.d(TAG, "Job Scheduled");
 
+        }else {
+            Log.d(TAG, "Job Scheduling failed");
 
+        }
+        if(mTimer!=null)
+            mTimer.cancel();
+        else
+            mTimer=new Timer(); // recreate new timer
+        mTimer.scheduleAtFixedRate(new TimeDisplayTimerTask(),0,INTERVAL);
 
+    }
+    public void cancelJob(View v){
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(123);
+        Log.d(TAG, "Job Cancelled");
+        mTimer.cancel();
+    }
+
+    private class TimeDisplayTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            // run on another thread
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    // display toast at every 10 second
+                    Toast.makeText(getApplicationContext(), "3 Seconds", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
 
 
 }
