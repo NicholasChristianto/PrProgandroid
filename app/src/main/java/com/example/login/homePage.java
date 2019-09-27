@@ -37,6 +37,7 @@ public class homePage extends AppCompatActivity {
     Boolean boolReceiver=false;
     Boolean isReceiverRegistered=false;
     Boolean wifiConnected = false;
+    Button button;
     private static final String TAG = "HomePage";
     public static final long INTERVAL=3000;//variable to execute services every 10 second
     private Handler mHandler=new Handler(); // run on another Thread to avoid crash
@@ -53,6 +54,7 @@ public class homePage extends AppCompatActivity {
         Bundle bun = getIntent().getExtras();
         String txtEmail = bun.getString("Email: ","");
         Toast.makeText(getApplicationContext(), "Welcome "+txtEmail, Toast.LENGTH_SHORT).show();
+        keList();
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -136,6 +138,17 @@ public class homePage extends AppCompatActivity {
                 }
             });
         }
+    }
+    protected void keList() {
+        button = findViewById(R.id.list);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent list = new Intent(homePage.this, listFilm.class);
+                startActivity(list);
+            }
+
+        });
     }
 
 
