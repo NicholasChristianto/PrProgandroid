@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".listFilm"></activity>
+        <activity android:name=".database"></activity>
+        <activity android:name=".listFilm" />
         <activity android:name=".cobaFragment" />
         <activity
             android:name=".About"

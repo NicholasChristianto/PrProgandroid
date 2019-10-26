@@ -47,13 +47,10 @@ public class homePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ViewPager vp = findViewById(R.id.view_pager);
-        vp.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),2));
+        vp.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),3));
         TabLayout tl = findViewById(R.id.tab_layout);
         tl.setupWithViewPager(vp);
         Intent intent = getIntent();
-        Bundle bun = getIntent().getExtras();
-        String txtEmail = bun.getString("Email: ","");
-        Toast.makeText(getApplicationContext(), "Welcome "+txtEmail, Toast.LENGTH_SHORT).show();
         keList();
     }
 
@@ -63,7 +60,6 @@ public class homePage extends AppCompatActivity {
             WifiManager wm =(WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (!isNetworkAvailable(context)) {
                 Notification(context,"Wifi Turned OFF");
-
             } else {
                 Notification(context,"Wifi Turned ON");
             }
@@ -150,6 +146,15 @@ public class homePage extends AppCompatActivity {
 
         });
     }
-
+//    protected void keDatabase(){
+//        button = findViewById(R.id.db);
+//        button.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent database = new Intent(homePage.this, database.class);
+//                startActivity(database);
+//            }
+//        });
+//    }
 
 }

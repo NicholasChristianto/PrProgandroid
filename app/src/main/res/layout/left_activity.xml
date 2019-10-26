@@ -10,26 +10,41 @@
     android:layout_height="wrap_content"
     android:text="Nama:"
     android:textSize="30dp"
-
     />
 
     <EditText
     android:id="@+id/isinama"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Nicholas Christianto"
+        android:text="Nicholas"
     />
+    <TextView
+        android:id="@+id/nim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NIM:"
+        android:textSize="30dp"
+
+        />
+
+    <EditText
+        android:id="@+id/isinim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="71170136"
+        />
     <TextView
     android:id="@+id/email"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Email:"
     android:textSize="30dp"
+
     />
     <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="nicholas.christianto@ti.ukdw.ac.id"
+        android:text="nicholas.christianto@ti.ukdw.ac.id"
     />
 
 </LinearLayout>
