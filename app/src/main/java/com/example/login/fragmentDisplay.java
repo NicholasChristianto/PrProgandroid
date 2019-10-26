@@ -58,7 +58,7 @@ public class fragmentDisplay extends Fragment {
                 contentValues.put("nama", isinama.getText().toString());
                 contentValues.put("noHp", isinohp.getText().toString());
                 mydb.insert("mahasiswa",null,contentValues);
-                la.swapCursor(getAllItem(),);
+                la.swapCursor(getAllItem());
 
                 //insertMahasiswa(isinama.getText().toString(),isinohp.getText().toString(),isinim.getText().toString());
             }
