@@ -13,7 +13,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public ViewPagerAdapter(FragmentManager fm,int tabs) {
         super(fm);
         this.tabs = tabs;
-        frag = new Fragment[]{new Left(), new Right(), new fragmentDisplay()};
+        frag = new Fragment[]{new Left(), new Right(), new fragmentDisplay(),new firebaseFragment()};
     }
     @Override
 
@@ -33,8 +33,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             title="Biodata";
         }else if(position==1){
             title="About";
-        }else{
+        }else if(position==2){
             title="Database";
+        }else {
+            title="FireBase";
         }
         return title;
     }

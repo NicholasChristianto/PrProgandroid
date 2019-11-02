@@ -47,7 +47,7 @@ public class homePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ViewPager vp = findViewById(R.id.view_pager);
-        vp.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),3));
+        vp.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),4));
         TabLayout tl = findViewById(R.id.tab_layout);
         tl.setupWithViewPager(vp);
         Intent intent = getIntent();

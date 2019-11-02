@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "233612163369",
+    "firebase_url": "https://project-progandro7117013-5d2b1.firebaseio.com",
+    "project_id": "project-progandro7117013-5d2b1",
+    "storage_bucket": "project-progandro7117013-5d2b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233612163369:android:a919d9429c76165f269f38",
+        "android_client_info": {
+          "package_name": "com.example.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233612163369-nojd19rvbqtvvli14fkfosgo2hneh7qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMaiTokErEOPVPnuhifpmvywtVpJ-dqGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233612163369-nojd19rvbqtvvli14fkfosgo2hneh7qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
