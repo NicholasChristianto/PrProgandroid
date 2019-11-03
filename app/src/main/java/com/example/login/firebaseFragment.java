@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -37,8 +38,9 @@ public class firebaseFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lm;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.firebase_fragment, container, false);
         rv = (RecyclerView) view.findViewById(R.id.recycle_matakuliah);
         SKS = view.findViewById(R.id.sks);
@@ -51,12 +53,19 @@ public class firebaseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //sanity check
-                if (!SKS.getText().toString().isEmpty() && !namaMatakuliah.getText().toString().isEmpty()&& !namaDosen.getText().toString().isEmpty()) {
+                if (!SKS.getText().toString().isEmpty() && !namaMatakuliah.getText().toString().isEmpty() && !namaDosen.getText().toString().isEmpty()) {
                     tambahMatakuliah();
                 } else {
                     Toast.makeText(requireActivity(), "SKS dan Nama Matakuliah tidak boleh kosong",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        buttonHapus.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                deleteDataMatakuliah();
+                getDataMataKuliah();
             }
         });
         return view;
@@ -86,6 +95,7 @@ public class firebaseFragment extends Fragment {
 
         getDataMataKuliah();
     }
+
     private void getDataMataKuliah() {
         final ArrayList<Matakuliah> dataMatkul = new ArrayList<Matakuliah>();
         System.out.println("========================================================================================");
@@ -98,8 +108,8 @@ public class firebaseFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Matakuliah mataKuliah = new Matakuliah();
-                                mataKuliah.setNama("Matakuliah: "+ document.get("nama").toString());
-                                mataKuliah.setDosen("Dosen: "+ document.get("dosen").toString());
+                                mataKuliah.setNama("Matakuliah: " + document.get("nama").toString());
+                                mataKuliah.setDosen("Dosen: " + document.get("dosen").toString());
                                 mataKuliah.setsks(((Long) document.get("sks")).intValue());
                                 dataMatkul.add(mataKuliah);
                             }
@@ -113,7 +123,29 @@ public class firebaseFragment extends Fragment {
                         }
                     }
                 });
+    }
 
+
+    private void deleteDataMatakuliah() {
+        firebaseFirestoreDb.collection("DaftarMhs").document()
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        namaMatakuliah.setText("");
+                        namaDosen.setText("");
+                        SKS.setText("");
+                        Toast.makeText(requireActivity(), "Data Berhasil Dihapus",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireActivity(), "Data Gagal Dihapus: " + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
 
