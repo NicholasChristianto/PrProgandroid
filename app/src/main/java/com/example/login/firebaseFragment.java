@@ -12,11 +12,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class firebaseFragment extends Fragment {
     private EditText SKS;
@@ -25,10 +33,14 @@ public class firebaseFragment extends Fragment {
     private Button buttonSimpan;
     private Button buttonHapus;
     private FirebaseFirestore firebaseFirestoreDb;
+    private RecyclerView rv;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager lm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.firebase_fragment, container, false);
+        rv = (RecyclerView) view.findViewById(R.id.recycle_matakuliah);
         SKS = view.findViewById(R.id.sks);
         namaMatakuliah = view.findViewById(R.id.namaMatakuliah);
         namaDosen = view.findViewById(R.id.namaDosen);
@@ -72,6 +84,35 @@ public class firebaseFragment extends Fragment {
                     }
                 });
 
+        getDataMataKuliah();
+    }
+    private void getDataMataKuliah() {
+        final ArrayList<Matakuliah> dataMatkul = new ArrayList<Matakuliah>();
+        System.out.println("========================================================================================");
+        System.out.println("terpanggil");
+        Task<QuerySnapshot> docRef = firebaseFirestoreDb.collection("DaftarMhs")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Matakuliah mataKuliah = new Matakuliah();
+                                mataKuliah.setNama("Matakuliah: "+ document.get("nama").toString());
+                                mataKuliah.setDosen("Dosen: "+ document.get("dosen").toString());
+                                mataKuliah.setsks(((Long) document.get("sks")).intValue());
+                                dataMatkul.add(mataKuliah);
+                            }
+                            rv.setHasFixedSize(true);
+                            rv.setNestedScrollingEnabled(false);
+                            lm = new LinearLayoutManager(getContext());
+                            rv.setLayoutManager(lm);
+                            adapter = new MatakuliahAdapter(dataMatkul);
+                            rv.setAdapter(adapter);
+                        } else {
+                        }
+                    }
+                });
 
     }
 }

@@ -4,12 +4,13 @@ public class Matakuliah {
     private int sks;
     private String nama;
     private String dosen;
-
+    public Matakuliah(){}
     public Matakuliah(int sks, String nama, String dosen) {
         this.sks = sks;
         this.nama = nama;
         this.dosen = dosen;
     }
+
 
     public String getNama() {
         return nama;
